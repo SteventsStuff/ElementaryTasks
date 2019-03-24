@@ -15,8 +15,8 @@ Funcs:
                              <find_str>,
                              <replace_str> (optional)
 
-     set_opts_task5(): add options: (-f --file, -m --method)
-     set_opts_task6()
+     set_opts_task5()
+     set_opts_task6(): add options: (-f --file, -m --method)
      set_opts_task7()
      set_opts_task8()
      set_opts_task9()
@@ -142,7 +142,7 @@ def set_args_task4():
 
 def set_args_task6():
     """
-    Add task 5 options:
+    Add task 6 options:
     - set file with tickets name
     - set method
 
