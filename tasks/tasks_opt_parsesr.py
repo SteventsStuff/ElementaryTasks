@@ -1,6 +1,6 @@
 """Module for parsing options and arguments for elementary tasks.
 
-Has function for create general options for every task and
+Has function for create general options or args for every task and
 set of functions for every task.
 
 !!!FOR NOW: IF OPTION HAS NOT PARAMETER PROGRAM STOPS!!!
@@ -9,8 +9,9 @@ Funcs:
      create_general_parser(usage: str)
      set_opts_task1(): add options: (-W --width, -H --height)
      set_opts_task2(): add options: (-A -B -C -D)
-     set_opts_task3(): no options
-     set_opts_task4()
+     set_opts_task3(): no other options
+
+     set_args_task4(): args: <file_name>, <find_str>, <replace_str>
      set_opts_task5()
      set_opts_task6()
      set_opts_task7()
@@ -59,6 +60,7 @@ def set_opts_task1():
     usage = """usage: %prog [options]
        %prog [no-options: interactive mode]"""
     task_parser = create_general_parser(usage)
+
     task_parser.add_option("-W", "--width",
                            dest="width",
                            help="set board width")
@@ -86,6 +88,7 @@ def set_opts_task2():
     usage = """usage: %prog [options]
        %prog [no-options: interactive mode]"""
     task_parser = create_general_parser(usage)
+
     task_parser.add_option("-A", dest="sideA", help="set a side")
     task_parser.add_option("-B", dest="sideB", help="set b side")
     task_parser.add_option("-C", dest="sideC", help="set c side")
@@ -106,5 +109,36 @@ def set_opts_task3():
     """
     usage = """%prog [no-options: interactive mode]"""
     task_parser = create_general_parser(usage)
+
     options = task_parser.parse_args()[0]
     print_author(options, 3)
+
+
+def set_opts_task4():
+    """
+    Add task 4 options:
+
+    Options:
+        Has no other options.
+        Set usage and check for author option.
+
+    Args:
+        <file_name>
+        <find_str>
+        <replace_str> (optional)
+
+        If has not enough args -> prints Message about it and stops.
+    """
+    usage = """usage: %prog [args: <file_name> <find_str> <replace_str>]"""
+    task_parser = create_general_parser(usage)
+
+    options, args = task_parser.parse_args()
+    print_author(options, 4)
+
+    if len(args) > 1:
+        if len(args) >= 3:
+            return args[0:3]
+        else:
+            return args[0:2]
+    else:
+        print("Not enough arguments!")
