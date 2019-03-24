@@ -15,11 +15,8 @@ class Triangle:
             self.side_a = float(a_size)
             self.side_b = float(b_size)
             self.side_c = float(c_size)
-        except TypeError as ty_err:
-            print(ty_err)
-            self.is_valid = False
-        except ValueError as val_err:
-            print(val_err)
+        except (TypeError, ValueError):
+            print("Invalid input!")
             self.is_valid = False
         else:
             if self.side_a + self.side_b > self.side_c \
@@ -27,6 +24,7 @@ class Triangle:
                     and self.side_c + self.side_b > self.side_a:
                 self.is_valid = True
             else:
+                print("Invalid size!")
                 self.is_valid = False
 
         if self.is_valid:
@@ -45,20 +43,20 @@ class Triangle:
 if __name__ == "__main__":
     set_opts_task3()
     triangle_list = []
-    is_moving = True
 
     while True:
         print("Enter your triangle:")
         try:
-            name, a_size, b_size, c_size = input("Name, side A, side B, side C: ").split()
-            some_triangle = Triangle(name, a_size, b_size, c_size)
-        except ValueError:
-            print(ValueError)
+            tr_name, a_size, b_size, c_size = input("Name, side A, side B, side C: ").split()
+            someTriangle = Triangle(tr_name, a_size, b_size, c_size)
+        except ValueError as e:
+            print(e)
         else:
-            if some_triangle.is_valid:
-                triangle_list.append(some_triangle)
+            if someTriangle.is_valid:
+                print("")
+                triangle_list.append(someTriangle)
 
-            user_choose = input("Do you want to continue add triangles? [Y/N]: ")
+            user_choose = input("Do you want to add more triangles? [Y/N]: ")
             if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
                 continue
             else:
@@ -66,7 +64,7 @@ if __name__ == "__main__":
 
     if triangle_list:
         triangle_list = sorted(triangle_list, key=lambda tr: tr.square, reverse=True)
-        print("============= Triangles list: ===============")
+        print("\n============= Triangles list: ===============")
         for index, triangle in enumerate(triangle_list):
             print(f"{index}. [{triangle.name}]: {triangle.get_square():.2f}cm")
     else:
