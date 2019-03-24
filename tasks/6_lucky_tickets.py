@@ -15,7 +15,8 @@ def use_easy_method(number):
     for char in number[3:]:
         right_part += int(char)
 
-    return left_part == right_part
+    if left_part == right_part:
+        print(f"{number} is lucky [using easy method]")
 
 
 def use_hard_method(number):
@@ -27,10 +28,21 @@ def use_hard_method(number):
         else:
             odd += int(number[i - 1])
 
-    return even == odd
+    if even == odd:
+        print(f"{number} is lucky [using hard method]")
 
 
 if __name__ == "__main__":
-    opts = set_args_task6()
+    file_name = set_args_task6()
 
+    file = open(file_name, "r")
+    method = file.readline()
+    numbers = file.read().split("\n")
 
+    for num in numbers:
+        if method == "easy":
+            use_easy_method(num)
+        elif method == "hard":
+            use_hard_method(num)
+
+    file.close()

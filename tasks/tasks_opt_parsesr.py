@@ -160,9 +160,9 @@ def set_args_task6():
 
     options = task_parser.parse_args()[0]
     print_author(options, 5)
-    generate_tickets(options.file, options.method)
+    generate_tickets(options.file_name, options.method)
 
-    return options.file, options.method
+    return options.file_name
 
 
 def generate_tickets(file_name, method="easy", amount=500):
