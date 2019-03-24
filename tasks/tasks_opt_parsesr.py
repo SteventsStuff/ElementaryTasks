@@ -1,4 +1,4 @@
-"""Module for parsing options ang arguments for elementary tasks.
+"""Module for parsing options and arguments for elementary tasks.
 
 Has function for create general options for every task and
 set of functions for every task.
@@ -7,8 +7,8 @@ set of functions for every task.
 
 Funcs:
      create_general_parser(usage: str)
-     set_opts_task1(): options: (-W --width, -H --height)
-     set_opts_task2(): options: (-A -B -C -D)
+     set_opts_task1(): add options: (-W --width, -H --height)
+     set_opts_task2(): add options: (-A -B -C -D)
      set_opts_task3(): no options
      set_opts_task4()
      set_opts_task5()
