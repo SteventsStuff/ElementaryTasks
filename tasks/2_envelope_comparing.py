@@ -12,7 +12,7 @@ def envelope_comparing(envelope_sides):
     comparing two Envelope objects
     :return True if envelope1 can be put in envelope2
     """
-    print("\nEnvelop number one: ", end="")
+    print("Envelop number one: ", end="")
     my_envelope_one = Envelope(envelope_sides[0], envelope_sides[1])
     print("The first envelope has been successfully created!")
     print("Envelop number two: ", end="")
@@ -40,11 +40,12 @@ class Envelope:
                     self.__side_b = float(side_b)
 
                 if not (self.__side_a > 0 and self.__side_b > 0):
+                    print("Invalid size!")
                     raise ValueError
                 else:
                     break
             except (TypeError, ValueError):
-                print()
+                print("(enter float values)")
                 self.IM_flag = True
 
     def __lt__(self, other):
@@ -58,6 +59,9 @@ if __name__ == "__main__":
     sides = set_opts_task2()
 
     while True:
+        if None in sides:
+            print("Interactive mode")
+
         envelope_comparing(sides)
 
         sides = [0, 0, 0, 0]
