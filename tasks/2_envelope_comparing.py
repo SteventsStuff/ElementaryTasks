@@ -60,7 +60,7 @@ if __name__ == "__main__":
     while True:
         envelope_comparing(sides)
 
-        sides = "0000"
+        sides = [0, 0, 0, 0]
         user_choose = input("Do you want to try one more time? [Y/N]: ")
         if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
             continue
