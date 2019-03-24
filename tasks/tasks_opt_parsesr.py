@@ -15,7 +15,7 @@ Funcs:
                              <find_str>,
                              <replace_str> (optional)
 
-     set_opts_task5()
+     set_opts_task5(): add options: (-f --file, -m --method)
      set_opts_task6()
      set_opts_task7()
      set_opts_task8()
