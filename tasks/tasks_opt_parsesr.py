@@ -23,6 +23,7 @@ Funcs:
 """
 
 import optparse
+import random
 
 
 def create_general_parser(usage="%prog [options]"):
@@ -137,3 +138,44 @@ def set_args_task4():
     print_author(options, 4)
 
     return args
+
+
+def set_args_task5():
+    """
+    Add task 5 options:
+    - set file with tickets name
+    - set method
+
+    call generate_tickets() to generate N tickets
+    """
+    usage = """usage: %prog [options]"""
+    task_parser = create_general_parser(usage)
+    task_parser.add_option("-f", "--file",
+                           help="file with tickets [name]",
+                           dest="file_name")
+    task_parser.add_option("-m", "--method",
+                           help="set method [default: easy] | hard | mixed",
+                           dest="method",
+                           default="easy")
+
+    options = task_parser.parse_args()[0]
+    print_author(options, 5)
+    generate_tickets(options.file, options.method)
+
+    return options.file, options.method
+
+
+def generate_tickets(file_name, method="easy", amount=500):
+    """generate N tickets with easy | hard | mixed methods"""
+    f = open(file_name, "w")
+    if method == "easy":
+        f.writelines("easy\n")
+    elif method == "hard":
+        f.writelines("hard\n")
+    else:
+        f.writelines("mixed\n")
+
+    for i in range(amount):
+        val = str(random.randint(100000, 999999))
+        f.writelines(f'{val}\n')
+    f.close()
