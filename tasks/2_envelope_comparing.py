@@ -53,11 +53,12 @@ class Envelope:
                 if not (self.__side_a > 0 and self.__side_b > 0):
                     print("Invalid size!")
                     raise ValueError
-                else:
-                    break
+
             except (TypeError, ValueError):
                 print("(enter float values)")
                 self.IM_flag = True
+            else:
+                break
 
     def __lt__(self, other):
         """Method for comparing two objects.

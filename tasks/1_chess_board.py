@@ -32,11 +32,12 @@ class ChessBoard:
                 if self.__width < 1 or self.__height < 1:
                     print("Invalid size!")
                     raise ValueError
-                else:
-                    break
+
             except (TypeError, ValueError):
                 print("Interactive mode:")
                 self.IM_flag = True
+            else:
+                break
 
     def draw_board(self):
         """Draw chess board.
