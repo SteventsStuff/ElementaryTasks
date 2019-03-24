@@ -140,7 +140,7 @@ def set_args_task4():
     return args
 
 
-def set_args_task5():
+def set_args_task6():
     """
     Add task 5 options:
     - set file with tickets name
