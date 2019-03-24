@@ -11,7 +11,10 @@ Funcs:
      set_opts_task2(): add options: (-A -B -C -D)
      set_opts_task3(): no other options
 
-     set_args_task4(): args: <file_name>, <find_str>, <replace_str>
+     set_args_task4(): args: <file_name>,
+                             <find_str>,
+                             <replace_str> (optional)
+
      set_opts_task5()
      set_opts_task6()
      set_opts_task7()
@@ -114,7 +117,7 @@ def set_opts_task3():
     print_author(options, 3)
 
 
-def set_opts_task4():
+def set_args_task4():
     """
     Add task 4 options:
 
@@ -126,8 +129,6 @@ def set_opts_task4():
         <file_name>
         <find_str>
         <replace_str> (optional)
-
-        If has not enough args -> prints Message about it and stops.
     """
     usage = """usage: %prog [args: <file_name> <find_str> <replace_str>]"""
     task_parser = create_general_parser(usage)
@@ -135,10 +136,4 @@ def set_opts_task4():
     options, args = task_parser.parse_args()
     print_author(options, 4)
 
-    if len(args) > 1:
-        if len(args) >= 3:
-            return args[0:3]
-        else:
-            return args[0:2]
-    else:
-        print("Not enough arguments!")
+    return args
