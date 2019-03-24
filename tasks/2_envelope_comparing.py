@@ -29,6 +29,17 @@ def envelope_comparing(envelope_sides):
 
 class Envelope:
     def __init__(self, side_a, side_b):
+        """This class creates envelope with size: A*B
+        and provides possibility for comparing two envelope.
+
+        Fields:
+            __side_a:   int
+            __side_b:   int
+
+        Methods:
+            __lt__(other) :return: True if self object is bigger,
+                                   False otherwise
+        """
         self.IM_flag = False
         while True:
             try:
@@ -49,6 +60,9 @@ class Envelope:
                 self.IM_flag = True
 
     def __lt__(self, other):
+        """Method for comparing two objects.
+        :return: True if self object is bigger or False otherwise
+        """
         if self.__side_a < other.__side_a and self.__side_b < other.__side_b:
             return True
         else:

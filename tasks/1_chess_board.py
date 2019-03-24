@@ -14,7 +14,7 @@ class ChessBoard:
             __width: int
             __height: int
         Methods:
-            draw_board :return: str
+            draw_board() :return: str
 
         If constructor has invalid inputs (can not convert
         width or height to integer, then its stars Interactive mode)
