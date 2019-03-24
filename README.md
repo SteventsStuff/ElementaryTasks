@@ -1,2 +1,2 @@
-# ElementaryTasks
+# Elementary Tasks
 SoftServeCourses
