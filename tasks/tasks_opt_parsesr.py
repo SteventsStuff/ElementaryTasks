@@ -9,7 +9,7 @@ Funcs:
      create_general_parser(usage: str)
      set_opts_task1(): options: (-W --width, -H --height)
      set_opts_task2(): options: (-A -B -C -D)
-     set_opts_task3()
+     set_opts_task3(): no options
      set_opts_task4()
      set_opts_task5()
      set_opts_task6()
@@ -80,8 +80,8 @@ def set_opts_task2():
     - set side C size (-C)
     - set side D size (-D)
 
-    :return: tuple of options.width,
-                      options.height
+    :return: tuple of options.sideA, options.sideB,
+                      options.sideC, options.sideD,
     """
     usage = """usage: %prog [options]
        %prog [no-options: interactive mode]"""
@@ -95,3 +95,16 @@ def set_opts_task2():
     print_author(options, 2)
 
     return options.sideA, options.sideB, options.sideC, options.sideD
+
+
+def set_opts_task3():
+    """
+    Add task 3 options:
+
+    Has no other options.
+    Only set usage and check for author option
+    """
+    usage = """%prog [no-options: interactive mode]"""
+    task_parser = create_general_parser(usage)
+    options = task_parser.parse_args()[0]
+    print_author(options, 3)
