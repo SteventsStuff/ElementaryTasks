@@ -42,15 +42,6 @@ def set_opts_task1():
     return options.width, options.height
 
 
-def set_opts_task3():
-    """Has no other options."""
-    usage = """%prog [no-options: interactive mode]"""
-    task_parser = create_general_parser(usage)
-
-    options = task_parser.parse_args()[0]
-    print_author(options, 3)
-
-
 def set_opts_task4():
     """Has no other options.
     :return: tuple of args (file_name find_str [optional: replace_str])

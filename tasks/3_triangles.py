@@ -4,7 +4,6 @@ Student:    Miroshnychenko V.
 Task:       Task 3
 """
 
-from tasks_opt_parsesr import *
 import math
 
 
@@ -42,7 +41,6 @@ class Triangle:
 
 
 if __name__ == "__main__":
-    set_opts_task3()
     triangle_list = []
 
     while True:
