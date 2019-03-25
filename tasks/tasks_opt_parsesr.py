@@ -42,25 +42,6 @@ def set_opts_task1():
     return options.width, options.height
 
 
-def set_opts_task2():
-    """Add task 2 options.
-    :return: tuple (sideA, sideB, sideC, sideD)
-    """
-    usage = """usage: %prog [options]
-       %prog [no-options: interactive mode]"""
-    task_parser = create_general_parser(usage)
-
-    task_parser.add_option("-A", dest="sideA", help="set a side")
-    task_parser.add_option("-B", dest="sideB", help="set b side")
-    task_parser.add_option("-C", dest="sideC", help="set c side")
-    task_parser.add_option("-D", dest="sideD", help="set d side")
-
-    options = task_parser.parse_args()[0]
-    print_author(options, 2)
-
-    return options.sideA, options.sideB, options.sideC, options.sideD
-
-
 def set_opts_task3():
     """Has no other options."""
     usage = """%prog [no-options: interactive mode]"""
@@ -79,18 +60,6 @@ def set_opts_task4():
 
     options, args = task_parser.parse_args()
     print_author(options, 4)
-    return args
-
-
-def set_opts_task5():
-    """Has no other options.
-    :return: <number>
-    """
-    usage = """usage: %prog <number>"""
-    task_parser = create_general_parser(usage)
-
-    options, args = task_parser.parse_args()
-    print_author(options, 5)
     return args
 
 
@@ -114,6 +83,18 @@ def set_args_task6():
     generate_tickets(options.file_name, options.method)
 
     return options.file_name
+
+
+def set_opts_task7():
+    """Has no other options.
+    :return: <number>
+    """
+    usage = """usage: %prog <number>"""
+    task_parser = create_general_parser(usage)
+
+    options, args = task_parser.parse_args()
+    print_author(options, 5)
+    return args
 
 
 def generate_tickets(file_name, method, amount=500):

@@ -4,28 +4,6 @@ Student:    Miroshnychenko V.
 Task:       Task 2
 """
 
-from tasks_opt_parsesr import *
-
-
-def envelope_comparing(envelope_sides):
-    """Comparing two Envelope objects
-    :return: True if envelope1 can be put in envelope2, False otherwise
-    """
-    print("Envelop number one: ", end="")
-    my_envelope_one = Envelope(envelope_sides[0], envelope_sides[1])
-    print("The first envelope has been successfully created!")
-
-    print("Envelop number two: ", end="")
-    my_envelope_two = Envelope(envelope_sides[2], envelope_sides[3])
-    print("The second envelope was successfully created!\n")
-
-    if my_envelope_two < my_envelope_one:
-        print("You can put one envelope in another")
-    elif my_envelope_one < my_envelope_two:
-        print("You can put one envelope in another")
-    else:
-        print("You can NOT put one envelope in another")
-
 
 class Envelope:
     def __init__(self, side_a, side_b):
@@ -43,11 +21,10 @@ class Envelope:
                     self.__side_b = float(side_b)
 
                 if not (self.__side_a > 0 and self.__side_b > 0):
-                    print("Invalid size!")
                     raise ValueError
 
             except (TypeError, ValueError):
-                print("(enter float values)")
+                print("(You need to enter positive float values)")
                 self.IM_flag = True
             else:
                 break
@@ -63,14 +40,24 @@ class Envelope:
 
 
 if __name__ == "__main__":
-    sides = set_opts_task2()
-
     while True:
-        if None in sides:
-            print("Interactive mode")
-        envelope_comparing(sides)
+        print("Envelop number one: ")
+        my_envelope_one = Envelope(side_a=input("Enter first side: "),
+                                   side_b=input("Enter second side: "))
+        print("The first envelope has been successfully created!")
 
-        sides = [0, 0, 0, 0]
+        print("\nEnvelop number two: ")
+        my_envelope_two = Envelope(side_a=input("Enter first side: "),
+                                   side_b=input("Enter second side: "))
+        print("The second envelope has been successfully created!\n")
+
+        if my_envelope_two < my_envelope_one:
+            print("You can put one envelope in another")
+        elif my_envelope_one < my_envelope_two:
+            print("You can put one envelope in another")
+        else:
+            print("You can NOT put one envelope in another")
+
         user_choose = input("Do you want to try one more time? [Y/N]: ")
         if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
             continue
