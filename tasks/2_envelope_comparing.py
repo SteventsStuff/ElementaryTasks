@@ -8,13 +8,13 @@ from tasks_opt_parsesr import *
 
 
 def envelope_comparing(envelope_sides):
-    """
-    comparing two Envelope objects
-    :return True if envelope1 can be put in envelope2
+    """Comparing two Envelope objects
+    :return: True if envelope1 can be put in envelope2, False otherwise
     """
     print("Envelop number one: ", end="")
     my_envelope_one = Envelope(envelope_sides[0], envelope_sides[1])
     print("The first envelope has been successfully created!")
+
     print("Envelop number two: ", end="")
     my_envelope_two = Envelope(envelope_sides[2], envelope_sides[3])
     print("The second envelope was successfully created!\n")
@@ -31,14 +31,6 @@ class Envelope:
     def __init__(self, side_a, side_b):
         """This class creates envelope with size: A*B
         and provides possibility for comparing two envelope.
-
-        Fields:
-            __side_a:   int
-            __side_b:   int
-
-        Methods:
-            __lt__(other) :return: True if self object is bigger,
-                                   False otherwise
         """
         self.IM_flag = False
         while True:
@@ -76,7 +68,6 @@ if __name__ == "__main__":
     while True:
         if None in sides:
             print("Interactive mode")
-
         envelope_comparing(sides)
 
         sides = [0, 0, 0, 0]
