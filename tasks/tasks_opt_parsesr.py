@@ -82,6 +82,18 @@ def set_opts_task4():
     return args
 
 
+def set_opts_task5():
+    """Has no other options.
+    :return: <number>
+    """
+    usage = """usage: %prog <number>"""
+    task_parser = create_general_parser(usage)
+
+    options, args = task_parser.parse_args()
+    print_author(options, 5)
+    return args
+
+
 def set_args_task6():
     """Add task 6 options.
     :return: file_name
@@ -98,7 +110,7 @@ def set_args_task6():
                            default="easy")
 
     options = task_parser.parse_args()[0]
-    print_author(options, 5)
+    print_author(options, 6)
     generate_tickets(options.file_name, options.method)
 
     return options.file_name
