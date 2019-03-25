@@ -10,6 +10,7 @@ import math
 
 class Triangle:
     def __init__(self, name, a_size, b_size, c_size):
+        """Create triangle with sides A, B, C and count it's square"""
         try:
             self.name = name
             self.side_a = float(a_size)
