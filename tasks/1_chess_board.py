@@ -9,16 +9,7 @@ from tasks_opt_parsesr import *
 
 class ChessBoard:
     def __init__(self, width, height):
-        """This class create chess board.
-        Fields:
-            __width: int
-            __height: int
-        Methods:
-            draw_board() :return: str
-
-        If constructor has invalid inputs (can not convert
-        width or height to integer, then its stars Interactive mode)
-        """
+        """Create chess board with size width * heigth"""
         self.IM_flag = False
         while True:
             try:
@@ -40,10 +31,7 @@ class ChessBoard:
                 break
 
     def draw_board(self):
-        """Draw chess board.
-        Returns:
-            string that visualizes a chess board
-        """
+        """Draw chess board"""
         board_str = ""
         for h in range(1, self.__height + 1):
             for elem in range(h,  self.__width + h):
