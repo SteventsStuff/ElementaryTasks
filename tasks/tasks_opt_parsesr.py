@@ -172,8 +172,6 @@ def generate_tickets(file_name, method="easy", amount=500):
         f.writelines("easy\n")
     elif method == "hard":
         f.writelines("hard\n")
-    else:
-        f.writelines("mixed\n")
 
     for i in range(amount):
         val = str(random.randint(100000, 999999))
