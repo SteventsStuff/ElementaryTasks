@@ -40,8 +40,10 @@ class Envelope:
 
 
 if __name__ == "__main__":
+    print("This program checks if it's possible to put one envelope another")
+
     while True:
-        print("Envelop number one: ")
+        print("\nEnvelop number one: ")
         my_envelope_one = Envelope(side_a=input("Enter first side: "),
                                    side_b=input("Enter second side: "))
         print("The first envelope has been successfully created!")
