@@ -9,6 +9,10 @@ import pathlib
 
 
 def parse_file(file_name, arguments, mode):
+    """Depends on mode, search how many times <find_str>
+    meet in file, or search <find_str> and replace it with
+    <replace_str>
+    """
     file_r = open(file_name, "r")
 
     if mode == 2:
