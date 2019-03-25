@@ -90,3 +90,15 @@ def generate_tickets(file_name, method, amount=500):
         val = str(random.randint(100000, 999999))
         f.writelines(f'{val}\n')
     f.close()
+
+
+def set_opts_task8():
+    """Add task 8 options.
+    :return: tuple of args (min, max)
+    """
+    usage = """usage: %prog [args: <range_min> <range_max>]"""
+    task_parser = create_general_parser(usage)
+
+    options, args = task_parser.parse_args()
+    print_author(options, 8)
+    return args
