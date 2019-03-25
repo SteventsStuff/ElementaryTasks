@@ -89,7 +89,7 @@ def set_args_task6():
     usage = """usage: %prog [options]"""
     task_parser = create_general_parser(usage)
     task_parser.add_option("-f", "--file",
-                           help="file with tickets",
+                           help="file with tickets [default: tickets.txt]",
                            default="tickets.txt",
                            dest="file_name")
     task_parser.add_option("-m", "--method",
