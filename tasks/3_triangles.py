@@ -46,7 +46,7 @@ if __name__ == "__main__":
     while True:
         print("Enter your triangle:")
         try:
-            tr_name, a_size, b_size, c_size = input("Name, side A, side B, side C: ").split()
+            tr_name, a_size, b_size, c_size = input("Name, sides A, B, C: ").split()
             someTriangle = Triangle(tr_name, a_size, b_size, c_size)
         except ValueError as e:
             print(e)
