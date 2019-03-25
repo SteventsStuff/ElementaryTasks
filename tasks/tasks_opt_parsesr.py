@@ -76,18 +76,6 @@ def set_args_task6():
     return options.file_name
 
 
-def set_opts_task7():
-    """Has no other options.
-    :return: <number>
-    """
-    usage = """usage: %prog <number>"""
-    task_parser = create_general_parser(usage)
-
-    options, args = task_parser.parse_args()
-    print_author(options, 5)
-    return args
-
-
 def generate_tickets(file_name, method, amount=500):
     """generate N tickets with easy | hard methods"""
     f = open(file_name, "w")
