@@ -25,7 +25,7 @@ class ChessBoard:
                     raise ValueError
 
             except (TypeError, ValueError):
-                print("Interactive mode:")
+                print("Interactive mode: (enter positive integer values)")
                 self.IM_flag = True
             else:
                 break

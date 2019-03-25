@@ -32,12 +32,11 @@ def set_opts_task1():
     task_parser = create_general_parser(usage)
 
     task_parser.add_option("-W", "--width",
-                           default="0", dest="width",
+                           default="0.1", dest="width",
                            help="set board width")
     task_parser.add_option("-H", "--height",
-                           default="0", dest="height",
+                           default="0.1", dest="height",
                            help="set board height")
-
     options = task_parser.parse_args()[0]
     print_author(options, 1)
     return options.width, options.height
