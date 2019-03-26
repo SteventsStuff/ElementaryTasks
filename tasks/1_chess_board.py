@@ -14,8 +14,8 @@ class ChessBoard:
         while True:
             try:
                 if self.IM_flag:
-                    self.__height = int(input("Enter width: "))
-                    self.__width = int(input("Enter height: "))
+                    self.__width = int(input("Enter width: "))
+                    self.__height = int(input("Enter height: "))
                 else:
                     self.__height = int(height)
                     self.__width = int(width)
