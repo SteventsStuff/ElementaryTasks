@@ -31,6 +31,7 @@ def use_hard_method(number):
 
 
 if __name__ == "__main__":
+    print("Loading...")
     file_name = set_args_task6()
     file = open(file_name, "r")
 
