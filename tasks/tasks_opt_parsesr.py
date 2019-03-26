@@ -56,15 +56,27 @@ def set_args_task6():
                            help="set method easy | hard [default: easy]",
                            dest="method",
                            default="easy")
+    task_parser.add_option("-n", "--number",
+                           help="set method amount of tickets [default: 500]",
+                           dest="tickets",
+                           default="500")
 
     options = task_parser.parse_args()[0]
     print_author(options, 6)
-    generate_tickets(options.file_name, options.method)
+    try:
+        tickets_num = int(options.tickets)
+        if tickets_num < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        print(f"Invalid input. '{options.file_name}' will has 500 tickets")
+        generate_tickets(options.file_name, options.method)
+    else:
+        generate_tickets(options.file_name, options.method, tickets_num)
 
     return options.file_name
 
 
-def generate_tickets(file_name, method, amount=100000):
+def generate_tickets(file_name, method, amount=500):
     """generate N tickets with easy | hard methods"""
     f = open(file_name, "w")
     if method == "easy":
