@@ -53,7 +53,7 @@ def set_args_task6():
                            default="tickets.txt",
                            dest="file_name")
     task_parser.add_option("-m", "--method",
-                           help="set method easy | hard [default: easy]",
+                           help="set method easy | hard | mixed [default: easy]",
                            dest="method",
                            default="easy")
     task_parser.add_option("-n", "--number",
