@@ -41,6 +41,8 @@ class Triangle:
 
 
 if __name__ == "__main__":
+    print("This program counts areas of N triangles and prints them into"
+          " a console, sorted by their areas\n")
     triangle_list = []
 
     while True:
@@ -52,7 +54,7 @@ if __name__ == "__main__":
             print(e)
         else:
             if someTriangle.is_valid:
-                print("")
+                print("Your triangle is right!\n")
                 triangle_list.append(someTriangle)
 
             user_choose = input("Do you want to add more triangles? [Y/N]: ")
@@ -65,6 +67,6 @@ if __name__ == "__main__":
         triangle_list = sorted(triangle_list, key=lambda tr: tr.square, reverse=True)
         print("\n============= Triangles list: ===============")
         for index, triangle in enumerate(triangle_list):
-            print(f"{index}. [{triangle.name}]: {triangle.get_square():.2f}cm")
+            print(f"{index+1}. [{triangle.name}]: {triangle.get_square():.2f}cm")
     else:
         print("There are no triangles in this list!")
