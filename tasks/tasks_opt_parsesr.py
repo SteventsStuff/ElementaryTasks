@@ -42,19 +42,6 @@ def set_opts_task1():
     return options.width, options.height
 
 
-def set_opts_task4():
-    """Has no other options.
-    :return: tuple of args (file_name find_str [optional: replace_str])
-    """
-    usage = """usage: %prog [args: <file_name> <find_str>] 
-       %prog [args: <file_name> <find_str> <replace_str>]"""
-    task_parser = create_general_parser(usage)
-
-    options, args = task_parser.parse_args()
-    print_author(options, 4)
-    return args
-
-
 def set_args_task6():
     """Add task 6 options.
     :return: file_name
@@ -91,15 +78,3 @@ def generate_tickets(file_name, method, amount=100000):
         val = "{:06}".format(random.randint(0, 999999))
         f.writelines(f'{val}\n')
     f.close()
-
-
-def set_opts_task8():
-    """Add task 8 options.
-    :return: tuple of args (min, max)
-    """
-    usage = """usage: %prog [args: <range_min> <range_max>]"""
-    task_parser = create_general_parser(usage)
-
-    options, args = task_parser.parse_args()
-    print_author(options, 8)
-    return args
