@@ -4,7 +4,7 @@ Student:    Miroshnychenko V.
 Task:       Task 6
 """
 
-from tasks_opt_parsesr import *
+import tasks_opt_parsesr
 
 
 def use_easy_method(number):
@@ -32,7 +32,7 @@ def use_hard_method(number):
 
 if __name__ == "__main__":
     print("Loading...")
-    file_name = set_args_task6()
+    file_name = tasks_opt_parsesr.set_args_task6()
     file = open(file_name, "r")
 
     method_list = file.readline().split()

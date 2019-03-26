@@ -4,7 +4,7 @@ Student:    Miroshnychenko V.
 Task:       Task 1
 """
 
-from tasks_opt_parsesr import *
+import tasks_opt_parsesr
 
 
 class ChessBoard:
@@ -45,5 +45,5 @@ class ChessBoard:
 
 
 if __name__ == "__main__":
-    opts = set_opts_task1()
+    opts = tasks_opt_parsesr.set_opts_task1()
     print(ChessBoard(opts[0], opts[1]).draw_board())
