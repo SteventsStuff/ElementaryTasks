@@ -14,7 +14,7 @@ class ChessBoard:
         self.height = height
 
     def draw_board(self):
-        """Draw chess board"""
+        """Draw a chess board"""
         board_str = ""
         for h in range(1, self.height + 1):
             for elem in range(h,  self.width + h):
