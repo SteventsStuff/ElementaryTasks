@@ -9,32 +9,15 @@ import tasks_opt_parsesr
 
 class ChessBoard:
     def __init__(self, width, height):
-        """Create chess board with size width * heigth"""
-        self.IM_flag = False
-        while True:
-            try:
-                if self.IM_flag:
-                    self.__width = int(input("Enter width: "))
-                    self.__height = int(input("Enter height: "))
-                else:
-                    self.__height = int(height)
-                    self.__width = int(width)
-
-                if self.__width < 1 or self.__height < 1:
-                    print("Invalid size!")
-                    raise ValueError
-
-            except (TypeError, ValueError):
-                print("Interactive mode: (enter positive integer values)")
-                self.IM_flag = True
-            else:
-                break
+        """Create chess board with size width * height"""
+        self.width = width
+        self.height = height
 
     def draw_board(self):
         """Draw chess board"""
         board_str = ""
-        for h in range(1, self.__height + 1):
-            for elem in range(h,  self.__width + h):
+        for h in range(1, self.height + 1):
+            for elem in range(h,  self.width + h):
                 if elem % 2 == 0:
                     board_str += " "
                 else:
@@ -45,5 +28,5 @@ class ChessBoard:
 
 
 if __name__ == "__main__":
-    opts = tasks_opt_parsesr.set_opts_task1()
+    opts = tasks_opt_parsesr.parse_task1_options()
     print(ChessBoard(opts[0], opts[1]).draw_board())
