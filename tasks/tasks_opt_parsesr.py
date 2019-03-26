@@ -46,7 +46,8 @@ def set_opts_task4():
     """Has no other options.
     :return: tuple of args (file_name find_str [optional: replace_str])
     """
-    usage = """usage: %prog [args: <file_name> <find_str> <replace_str>]"""
+    usage = """usage: %prog [args: <file_name> <find_str>] 
+       %prog [args: <file_name> <find_str> <replace_str>]"""
     task_parser = create_general_parser(usage)
 
     options, args = task_parser.parse_args()
@@ -76,7 +77,7 @@ def set_args_task6():
     return options.file_name
 
 
-def generate_tickets(file_name, method, amount=500):
+def generate_tickets(file_name, method, amount=100000):
     """generate N tickets with easy | hard methods"""
     f = open(file_name, "w")
     if method == "easy":
@@ -87,7 +88,7 @@ def generate_tickets(file_name, method, amount=500):
         f.writelines("easy hard\n")
 
     for i in range(amount):
-        val = str(random.randint(100000, 999999))
+        val = "{:06}".format(random.randint(0, 999999))
         f.writelines(f'{val}\n')
     f.close()
 

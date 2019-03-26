@@ -40,8 +40,15 @@ if __name__ == "__main__":
         print("Interactive mode:")
         while True:
             file = input("Enter file name: ")
-            if pathlib.Path(file).is_file():
-                parse_file(file, args, len(args))
+            find_str = input("Enter str to find: ")
+            replace_str = input("Enter str to replace [optional]: ")
+
+            if pathlib.Path(file).is_file() and find_str and not replace_str:
+                parse_file(file, [0, find_str], 2)
+                break
+            elif pathlib.Path(file).is_file() and find_str and replace_str:
+                parse_file(file, [0, find_str, replace_str], 3)
+                break
             else:
-                print("File not found!")
+                print("Invalid input\n")
                 continue
