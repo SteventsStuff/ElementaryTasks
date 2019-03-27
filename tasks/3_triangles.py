@@ -7,66 +7,72 @@ Task:       Task 3
 import math
 
 
-class Triangle:
-    def __init__(self, name, a_size, b_size, c_size):
-        """Create triangle with sides A, B, C and count it's square"""
-        try:
-            self.name = name
-            self.side_a = float(a_size)
-            self.side_b = float(b_size)
-            self.side_c = float(c_size)
-        except (TypeError, ValueError):
-            print("Invalid input!")
-            self.is_valid = False
-        else:
-            if self.side_a + self.side_b > self.side_c \
-                    and self.side_a + self.side_c > self.side_b \
-                    and self.side_c + self.side_b > self.side_a:
-                self.is_valid = True
-            else:
-                print("Invalid size!")
-                self.is_valid = False
-
-        if self.is_valid:
-            self.p = (self.side_a + self.side_b + self.side_c)/2
-            self.square = math.sqrt(self.p
-                                    * (self.p - self.side_a)
-                                    * (self.p - self.side_b)
-                                    * (self.p - self.side_c))
-        else:
-            print("This triangle is not valid!")
-
-    def get_square(self):
-        return self.square
-
-
-if __name__ == "__main__":
+def main():
     print("This program counts areas of N triangles and prints them into"
           " a console, sorted by their areas\n")
     triangle_list = []
 
     while True:
-        print("Enter your triangle:")
+        print("Enter triangle: ")
         try:
             tr_name, a_size, b_size, c_size = input("Name, sides A, B, C: ").split()
-            someTriangle = Triangle(tr_name, a_size, b_size, c_size)
-        except ValueError as e:
+            # a_size, b_size, c_size = float(a_size), float(b_size), float(c_size)
+            triangle_instance = Triangle(tr_name, float(a_size), float(b_size), float(c_size))
+        except (ValueError, TypeError) as e:
             print(e)
         else:
-            if someTriangle.is_valid:
-                print("Your triangle is right!\n")
-                triangle_list.append(someTriangle)
+            triangle_list.append(triangle_instance)
+            print("Triangle added to the list")
 
-            user_choose = input("Do you want to add more triangles? [Y/N]: ")
-            if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
-                continue
-            else:
-                break
+        user_choose = input("Do you want to add more triangles? [Y/N]: ")
+        if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
+            continue
+        else:
+            break
 
+    print_triangles(triangle_list)
+
+
+def print_triangles(triangle_list):
     if triangle_list:
-        triangle_list = sorted(triangle_list, key=lambda tr: tr.square, reverse=True)
+        triangle_list = sorted(triangle_list, key=lambda tr: tr.get_square(), reverse=True)
         print("\n============= Triangles list: ===============")
         for index, triangle in enumerate(triangle_list):
-            print(f"{index+1}. [{triangle.name}]: {triangle.get_square():.2f}cm")
+            print(f"{index+1}. [{triangle.get_name()}]: {triangle.get_square():.2f}cm")
     else:
         print("There are no triangles in this list!")
+
+
+class Triangle:
+    def __init__(self, name, a_size, b_size, c_size):
+        """Create triangle with sides A, B, C and count it's square"""
+        self.name = name
+        self.a_size = a_size
+        self.b_size = b_size
+        self.c_size = c_size
+
+        self.check_is_valid()
+        self.square = self.calc_square()
+
+    def check_is_valid(self):
+        if not (self.a_size + self.b_size > self.c_size
+                and self.a_size + self.c_size > self.b_size
+                and self.c_size + self.b_size > self.a_size):
+            raise ValueError("Invalid size!")
+
+    def calc_square(self):
+        p = (self.a_size + self.b_size + self.c_size) / 2
+        return math.sqrt(p
+                         * (p - self.a_size)
+                         * (p - self.b_size)
+                         * (p - self.c_size))
+
+    def get_square(self):
+        return self.square
+
+    def get_name(self):
+        return self.name
+
+
+if __name__ == "__main__":
+    main()
