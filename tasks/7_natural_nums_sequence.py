@@ -1,37 +1,37 @@
-"""
-Group:      DP158Py
-Student:    Miroshnychenko V.
-Task:       Task 7
-"""
+#!/usr/bin/env python3
 
 import sys
+from tasks_args_parser import *
 
 
-def interactive_mode():
+def main():
+    args = parse_args_from_cmdline_7(sys.argv[1:])
+
+    if args.number:
+        try:
+            num = int(args.number)
+            if num < 1:
+                raise ValueError
+            print([x for x in range(num) if x**2 < num and x > 0])
+        except (TypeError, ValueError):
+            activate_interactive_mode()
+    else:
+        activate_interactive_mode()
+
+
+def activate_interactive_mode():
+    print("You need to enter positive integer number!")
     while True:
         try:
             number = int(input("Enter number: "))
-            if not number > 0:
+            if number < 1:
                 raise ValueError
         except (TypeError, ValueError):
-            print("Invalid size!")
-            continue
+            print("Invalid value!")
         else:
-            print([x for x in range(number) if x ** 2 < number])
+            print([x for x in range(number) if x ** 2 < number and x > 0])
             break
 
 
 if __name__ == "__main__":
-    args = sys.argv
-
-    if len(args) > 1:
-        try:
-            num = int(args[1])
-            if not num > 0:
-                raise ValueError
-            print([x for x in range(num) if x**2 < num])
-        except (TypeError, ValueError):
-            interactive_mode()
-    else:
-        print("You need to enter positive integer number!")
-        interactive_mode()
+    main()

@@ -1,59 +1,73 @@
-"""
-Group:      DP158Py
-Student:    Miroshnychenko V.
-Task:       Task 6
-"""
+#!/usr/bin/env python3
 
-import tasks_opt_parsesr
-
-
-def use_easy_method(number):
-    left_part = 0
-    right_part = 0
-    for char in number[0:3]:
-        left_part += int(char)
-    for char in number[3:]:
-        right_part += int(char)
-
-    return left_part == right_part
+import sys
+import random
+from pathlib import Path
+from tasks_args_parser import *
 
 
-def use_hard_method(number):
-    even = 0
-    odd = 0
-    for i in range(1, 7):
-        if i % 2 == 0:
-            even += int(number[i - 1])
+def main():
+    args = parse_args_from_cmdline_6(sys.argv[1:])
+
+    print("Generating tickets...")
+    tickets_list = generate_tickets()
+
+    if Path(args.file_name).is_file():
+        method = get_file_content(args.file_name)
+        if method:
+            count_tickets(method, tickets_list)
         else:
-            odd += int(number[i - 1])
+            activate_interactive_mode(tickets_list)
+    else:
+        activate_interactive_mode(tickets_list)
 
-    return even == odd
+
+def generate_tickets():
+    return [f"{random.randint(0, 1000000):06}" for _ in range(1000000)]
+
+
+def get_file_content(file_name):
+    file = open(file_name, "r")
+    method = file.readline().strip().lower()
+    file.close()
+
+    if method:
+        if method in ("moscow", "piter"):
+            print(f"'{method}' will be used!")
+            return method
+        else:
+            print(f"'{method}' is invalid!")
+    else:
+        print("Your file is empty!")
+
+
+def count_tickets(method, tickets_list):
+    print("Counting...")
+    counter = 0
+    for ticket in tickets_list:
+        if method == "moscow":
+            left_side = sum([int(digit) for digit in ticket[:3]])
+            right_side = sum([int(digit) for digit in ticket[3:]])
+            if left_side == right_side:
+                counter += 1
+
+        if method == "piter":
+            odd = sum([int(digit) for digit in ticket if int(digit) % 2 != 0])
+            even = sum([int(digit) for digit in ticket if int(digit) % 2 == 0])
+            if odd == even:
+                counter += 1
+
+    print(f"You got {counter} lucky tickets, using {method} method!")
+
+
+def activate_interactive_mode(tickets_list):
+    print("Interactive mode:")
+    user_method = ""
+    while user_method.lower() not in ("moscow", "piter"):
+        user_method = input("Enter method ('moscow' or 'piter'): ")
+
+    count_tickets(user_method.lower(), tickets_list)
 
 
 if __name__ == "__main__":
-    print("Loading...")
-    file_name = tasks_opt_parsesr.set_args_task6()
-    file = open(file_name, "r")
-
-    method_list = file.readline().split()
-    numbers = file.read().split("\n")[:-1]
-    counter_easy = 0
-    counter_hard = 0
-
-    for num in numbers:
-        if "easy" in method_list:
-            if use_easy_method(num):
-                counter_easy += 1
-                print(f"{num} is lucky [using easy method]")
-        if "hard" in method_list:
-            if use_hard_method(num):
-                counter_hard += 1
-                print(f"{num} is lucky [using hard method]")
-
-    print()
-    if counter_easy:
-        print(f"{counter_easy} lucky tickets using easy method ")
-    if counter_hard:
-        print(f"{counter_hard} lucky tickets using hard method ")
-
-    file.close()
+    main()

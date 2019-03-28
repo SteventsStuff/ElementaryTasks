@@ -1,12 +1,7 @@
-"""
-Group:      DP158Py
-Student:    Miroshnychenko V.
-Task:       Task 2
-"""
+#!/usr/bin/env python3
 
 
 def main():
-    """idk how to name this func normally"""
     print("This program checks if it's possible to put one envelope another")
     while True:
         print("\nEnvelop number one: ")
@@ -18,10 +13,9 @@ def main():
         print("The second envelope has been successfully created!\n")
 
         compare_envelopes(envelope_one, envelope_two)
+
         user_choose = input("Do you want to try one more time? [Y/N]: ")
-        if user_choose.lower() == 'y' or user_choose.lower() == 'yes':
-            continue
-        else:
+        if not user_choose.lower() in ("y", "yes"):
             break
 
 
@@ -32,11 +26,9 @@ def set_envelope_size():
             side_b = float(input("Enter second side: "))
             if side_a <= 0 or side_b <= 0:
                 raise ValueError
-        except (TypeError, ValueError):
-            print("You need to enter positive float values, dummy!\n")
-            continue
-        else:
             return side_a, side_b
+        except ValueError:
+            print("You need to enter positive float values, dummy!\n")
 
 
 def create_envelope():
@@ -57,14 +49,14 @@ class Envelope:
         """This class creates envelope with size: A*B
         and provides possibility for comparing two envelope.
         """
-        self.side_a = side_a
-        self.side_b = side_b
+        self._side_a = side_a
+        self._side_b = side_b
 
     def __lt__(self, other):
         """Method for comparing two objects.
         :return: True if self object is bigger or False otherwise
         """
-        if self.side_a < other.side_a and self.side_b < other.side_b:
+        if self._side_a < other.side_a and self._side_b < other.side_b:
             return True
         else:
             return False
