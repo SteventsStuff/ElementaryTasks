@@ -10,7 +10,7 @@ def main():
     args = parse_args_from_cmdline_6(sys.argv[1:])
 
     print("Generating tickets...")
-    tickets_list = generate_tickets()
+    tickets_list = [f"{num:06}" for num in range(1000000)]
 
     if Path(args.file_name).is_file():
         method = get_file_content(args.file_name)
@@ -20,10 +20,6 @@ def main():
             activate_interactive_mode(tickets_list)
     else:
         activate_interactive_mode(tickets_list)
-
-
-def generate_tickets():
-    return [f"{random.randint(0, 1000000):06}" for _ in range(1000000)]
 
 
 def get_file_content(file_name):
@@ -52,8 +48,8 @@ def count_tickets(method, tickets_list):
                 counter += 1
 
         if method == "piter":
-            odd = sum([int(digit) for digit in ticket if int(digit) % 2 != 0])
-            even = sum([int(digit) for digit in ticket if int(digit) % 2 == 0])
+            odd = sum([int(digit) for digit in ticket[::2]])
+            even = sum([int(digit) for digit in ticket[1::2]])
             if odd == even:
                 counter += 1
 
