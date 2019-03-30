@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import random
 from pathlib import Path
 from tasks_args_parser import *
 
