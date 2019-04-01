@@ -13,7 +13,7 @@ def main():
     if Path(args.file_name).is_file():
         method = get_file_content(args.file_name)
         if method:
-            count_tickets(method, tickets_list)
+            print(count_tickets(method, tickets_list))
         else:
             activate_interactive_mode(tickets_list)
     else:
@@ -51,7 +51,7 @@ def count_tickets(method, tickets_list):
             if odd == even:
                 counter += 1
 
-    print(f"You got {counter} lucky tickets, using {method} method!")
+    return f"You got {counter} lucky tickets, using {method} method!"
 
 
 def activate_interactive_mode(tickets_list):
@@ -63,7 +63,7 @@ def activate_interactive_mode(tickets_list):
         if user_method == "":
             exit()
 
-    count_tickets(user_method.lower(), tickets_list)
+    print(count_tickets(user_method.lower(), tickets_list))
 
 
 def parse_args_from_cmdline_6(argv):

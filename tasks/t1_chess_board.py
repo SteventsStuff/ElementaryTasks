@@ -34,6 +34,9 @@ def activate_interactive_mode(terminal_size):
     user_width, user_height = get_user_input()
     if check_board_size(user_width, user_height, terminal_size):
         print(ChessBoard(user_width, user_height).draw_board())
+        return True
+    else:
+        activate_interactive_mode(terminal_size)
 
 
 def get_user_input():
@@ -55,7 +58,7 @@ def check_board_size(width, height, term_size):
         print("\nInvalid size!")
         print(f"WIDTH must be min: 1 and max: {term_size.columns - 1}")
         print(f"HEIGHT must be min: 1 and max: {term_size.lines - 1}\n")
-        activate_interactive_mode(term_size)
+        return False
     else:
         return True
 
