@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import sys
 import os
-from tasks_args_parser import *
+import argparse
 
 
 def main():
-    args = parse_args_from_cmdline_1(sys.argv[1:])
+    args = parse_args_from_cmdline(sys.argv[1:])
     terminal_size = os.get_terminal_size()
 
     if args.width and args.height:
@@ -58,6 +58,15 @@ def check_board_size(width, height, term_size):
         activate_interactive_mode(term_size)
     else:
         return True
+
+
+def parse_args_from_cmdline(argv):
+    parser = argparse.ArgumentParser(
+        prog="Chess_board",
+        description="This program creates chess board with WIDTH*HEIGHT size")
+    parser.add_argument("--width", help="set chess board width (int)")
+    parser.add_argument("--height", help="set chess board height (int)")
+    return parser.parse_args(argv)
 
 
 class ChessBoard:

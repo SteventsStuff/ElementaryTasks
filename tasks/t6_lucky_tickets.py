@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 from pathlib import Path
-from tasks_args_parser import *
+import argparse
 
 
 def main():
@@ -64,6 +64,15 @@ def activate_interactive_mode(tickets_list):
             exit()
 
     count_tickets(user_method.lower(), tickets_list)
+
+
+def parse_args_from_cmdline_6(argv):
+    parser = argparse.ArgumentParser(
+        prog="Lucky_tickets",
+        description="Count amount of lucky tickets depends on count method")
+    parser.add_argument("--file", dest="file_name", default="",
+                        help="set file with method name")
+    return parser.parse_args(argv)
 
 
 if __name__ == "__main__":

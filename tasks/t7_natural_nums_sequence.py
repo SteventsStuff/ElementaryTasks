@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
 import sys
-from tasks_args_parser import *
+import argparse
 
 
 def main():
@@ -39,6 +38,15 @@ def activate_interactive_mode():
         else:
             print([x for x in range(number) if x ** 2 < number and x > 0])
             break
+
+
+def parse_args_from_cmdline_7(argv):
+    parser = argparse.ArgumentParser(
+        prog="Natural_nums_sequence",
+        description="""Displays sequence of numbers, power of which less
+         than entered number""")
+    parser.add_argument("--number", help="set border number")
+    return parser.parse_args(argv)
 
 
 if __name__ == "__main__":

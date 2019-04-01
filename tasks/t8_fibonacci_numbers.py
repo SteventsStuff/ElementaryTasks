@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
 import sys
-from tasks_args_parser import *
+import argparse
 
 
 def main():
@@ -60,6 +59,16 @@ def print_fibo(start, end):
         elif number >= end:
             print()
             break
+
+
+def parse_args_from_cmdline_8(argv):
+    parser = argparse.ArgumentParser(
+        prog="Fibonacci_numbers",
+        description="Displays sequence of fibonacci numbers, in range")
+    parser.add_argument("--min", help="set min possible number")
+    parser.add_argument("--max", help="set max possible number")
+    args = parser.parse_args(argv)
+    return args.min, args.max
 
 
 if __name__ == "__main__":

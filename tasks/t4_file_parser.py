@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import pathlib
 import sys
-from tasks_args_parser import *
+import argparse
 
 
 def main():
@@ -63,6 +63,23 @@ def parse_file(file_name, str_find, str_replace=None):
         print(f'"{str_find}" meets {counter} times')
 
     file.close()
+
+
+def parse_args_from_cmdline_4(argv):
+    parser = argparse.ArgumentParser(
+        prog="File_parser",
+        description="""Count entries of <string> you need to 
+                    enter 2 params: --file --find_str
+                    Replace <str1> with <str2> enter 3 params:
+                    --file --find_str --replace_str""")
+    parser.add_argument("--file", dest="file_path",
+                        default="", help="set file with test name")
+    parser.add_argument("--find", dest="find_str",
+                        help="set a string which needs to be found")
+    parser.add_argument("--replace", dest="replace_str",
+                        help="set a string to replace")
+    args = parser.parse_args(argv)
+    return args.file_path, args.find_str, args.replace_str
 
 
 if __name__ == "__main__":

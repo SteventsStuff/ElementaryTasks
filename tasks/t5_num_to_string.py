@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from tasks_args_parser import *
+import argparse
 
 
 def num2words(num):
@@ -71,6 +71,15 @@ def get_user_input():
             return num
         except ValueError:
             print(print_invalid_input_message())
+
+
+def parse_args_from_cmdline_5(argv):
+    parser = argparse.ArgumentParser(
+        prog="Num_to_str",
+        description="Convert number to a string")
+    parser.add_argument("--num", dest="number",
+                        default="0", help="set number to convert")
+    return parser.parse_args(argv)
 
 
 if __name__ == "__main__":
