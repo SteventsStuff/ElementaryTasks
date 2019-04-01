@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import math
 
 
@@ -10,15 +9,14 @@ def main():
 
     while True:
         try:
-            name, a_size, b_size, c_size = input("Enter Name, A, B, C: ").split()
+            name, a_size, b_size, c_size = input("Name, A, B, C: ").split()
             triangle_instance = Triangle(name,
                                          float(a_size),
                                          float(b_size),
                                          float(c_size))
             triangle_instance.get_area()
         except ValueError:
-            print("Invalid input!")
-            print("This triangle won't be appended to the list!\n")
+            print(print_invalid_input_message())
         else:
             triangle_list.append(triangle_instance)
             print("Triangle added to the list")
@@ -28,6 +26,10 @@ def main():
             break
 
     print_triangles(triangle_list)
+
+
+def print_invalid_input_message():
+    return "Invalid input!\nThis triangle won't be added to the list!\n"
 
 
 def print_triangles(triangle_list):
@@ -44,7 +46,6 @@ def print_triangles(triangle_list):
 
 class Triangle:
     def __init__(self, name, a_size, b_size, c_size):
-        """Create triangle with sides A, B, C and count it's square"""
         self.validate_triangle_size()
         self._name = name
         self._a_size = a_size

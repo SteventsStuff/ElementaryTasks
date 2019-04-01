@@ -56,13 +56,21 @@ def main():
         print(num2words(number))
 
 
+def print_invalid_input_message():
+    return "Invalid input!"
+
+
 def get_user_input():
     while True:
         try:
-            num = int(input("Enter number: "))
+            print("Enter empty line to exit")
+            num = input("Enter number: ")
+            if num == "":
+                exit()
+            num = int(num)
             return num
         except ValueError:
-            print("Invalid input!")
+            print(print_invalid_input_message())
 
 
 if __name__ == "__main__":

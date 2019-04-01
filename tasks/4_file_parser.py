@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import pathlib
 import sys
 from tasks_args_parser import *
@@ -18,12 +17,19 @@ def main():
         activate_interactive_mode()
 
 
+def print_no_file_found_message():
+    return "No file with this name!\n"
+
+
 def activate_interactive_mode():
     while True:
         try:
+            print("Enter empty lines to exit")
             file_name = input("Enter file name: ")
             find_str = input("Enter string for search: ")
             replace_str = input("Enter string to replace (optional): ")
+            if not (file_name, find_str, replace_str):
+                exit()
             if not pathlib.Path(file_name).is_file():
                 raise FileNotFoundError
             if replace_str and find_str:
@@ -34,7 +40,7 @@ def activate_interactive_mode():
                 print("You need at least to enter string for search!\n")
             break
         except FileNotFoundError:
-            print("No file with this name!\n")
+            print(print_no_file_found_message())
 
 
 def parse_file(file_name, str_find, str_replace=None):

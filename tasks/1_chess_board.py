@@ -15,12 +15,19 @@ def main():
             if check_board_size(args.width, args.height, terminal_size):
                 print(ChessBoard(args.width, args.height).draw_board())
         except ValueError:
-            print("Invalid values!")
-            print("Interactive mode:")
+            print(print_interactive_mode_message())
             activate_interactive_mode(terminal_size)
     else:
         print("Interactive mode:")
         activate_interactive_mode(terminal_size)
+
+
+def print_interactive_mode_message():
+    return "Invalid values!\nInteractive mode:"
+
+
+def print_wrong_type_message():
+    return "WIDTH/HEIGHT must be integers!\n"
 
 
 def activate_interactive_mode(terminal_size):
@@ -32,11 +39,15 @@ def activate_interactive_mode(terminal_size):
 def get_user_input():
     while True:
         try:
-            user_width = int(input("Enter chess board WIDTH: "))
-            user_height = int(input("Enter chess board HEIGHT: "))
+            print("Enter empty lines to exit")
+            user_width = input("Enter chess board WIDTH: ")
+            user_height = input("Enter chess board HEIGHT: ")
+            if user_height == "" and user_width == "":
+                exit()
+            user_width, user_height = int(user_width), int(user_height)
             return user_width, user_height
         except ValueError:
-            print("WIDTH/HEIGHT must be integers!\n")
+            print(print_wrong_type_message())
 
 
 def check_board_size(width, height, term_size):
@@ -51,12 +62,10 @@ def check_board_size(width, height, term_size):
 
 class ChessBoard:
     def __init__(self, width, height):
-        """Create chess board with size width * height"""
         self._width = width
         self._height = height
 
     def draw_board(self):
-        """Draw chess board"""
         board_str = ""
         for h in range(1, self._height + 1):
             for elem in range(h,  self._width + h):

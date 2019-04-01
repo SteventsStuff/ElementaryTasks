@@ -19,15 +19,23 @@ def main():
         activate_interactive_mode()
 
 
+def print_invalid_input_message():
+    return "Invalid input!"
+
+
 def activate_interactive_mode():
     print("You need to enter positive integer number!")
     while True:
         try:
+            print("Enter empty line to exit")
             number = int(input("Enter number: "))
+            if number == "":
+                exit()
+            number = int(number)
             if number < 1:
                 raise ValueError
         except (TypeError, ValueError):
-            print("Invalid value!")
+            print(print_invalid_input_message())
         else:
             print([x for x in range(number) if x ** 2 < number and x > 0])
             break

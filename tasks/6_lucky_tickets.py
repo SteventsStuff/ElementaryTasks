@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from pathlib import Path
 from tasks_args_parser import *
@@ -58,8 +57,11 @@ def count_tickets(method, tickets_list):
 def activate_interactive_mode(tickets_list):
     print("Interactive mode:")
     user_method = ""
+    print("Enter empty line to exit")
     while user_method.lower() not in ("moscow", "piter"):
         user_method = input("Enter method ('moscow' or 'piter'): ")
+        if user_method == "":
+            exit()
 
     count_tickets(user_method.lower(), tickets_list)
 

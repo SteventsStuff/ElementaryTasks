@@ -16,24 +16,32 @@ def main():
                 raise ValueError
             print_fibo(int_min, int_max)
         except (TypeError, ValueError):
-            print("Invalid arguments!")
+            print(print_invalid_args_message())
             activate_interactive_mode()
     else:
         activate_interactive_mode()
+
+
+def print_invalid_args_message():
+    return "Invalid arguments!"
 
 
 def activate_interactive_mode():
     print("Interactive mode:")
     while True:
         try:
-            min_val = int(input("Enter min value: "))
-            max_val = int(input("Enter max value: "))
+            print("Enter empty lines to exit")
+            min_val = input("Enter min value: ")
+            max_val = input("Enter max value: ")
+            if min_val == "" and max_val == "":
+                exit()
+            min_val, max_val = int(min_val), int(max_val)
             if not 0 <= min_val < max_val:
                 raise ValueError
             print_fibo(min_val, max_val)
             break
         except (TypeError, ValueError):
-            print("Invalid arguments!")
+            print(print_invalid_args_message())
 
 
 def fibonacci_seq():

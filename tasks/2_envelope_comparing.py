@@ -4,11 +4,11 @@
 def main():
     print("This program checks if it's possible to put one envelope another")
     while True:
-        print("\nEnvelop number one: ")
+        print("\nEnvelop number one")
         envelope_one = create_envelope()
         print("The first envelope has been successfully created!")
 
-        print("\nEnvelop number two: ")
+        print("\nEnvelop number two")
         envelope_two = create_envelope()
         print("The second envelope has been successfully created!\n")
 
@@ -19,16 +19,24 @@ def main():
             break
 
 
+def print_wrong_type_message():
+    return "You need to enter positive float values, dummy!\n"
+
+
 def set_envelope_size():
     while True:
         try:
-            side_a = float(input("Enter first side: "))
-            side_b = float(input("Enter second side: "))
+            print("Enter empty lines to exit")
+            side_a = input("Enter first side: ")
+            side_b = input("Enter second side: ")
+            if side_a == "" and side_b == "":
+                exit()
+            side_a, side_b = float(side_a), float(side_b)
             if side_a <= 0 or side_b <= 0:
                 raise ValueError
             return side_a, side_b
         except ValueError:
-            print("You need to enter positive float values, dummy!\n")
+            print(print_wrong_type_message())
 
 
 def create_envelope():
@@ -46,16 +54,10 @@ def compare_envelopes(envelope_1, envelope_2):
 
 class Envelope:
     def __init__(self, side_a, side_b):
-        """This class creates envelope with size: A*B
-        and provides possibility for comparing two envelope.
-        """
         self._side_a = side_a
         self._side_b = side_b
 
     def __lt__(self, other):
-        """Method for comparing two objects.
-        :return: True if self object is bigger or False otherwise
-        """
         if self._side_a < other.side_a and self._side_b < other.side_b:
             return True
         else:
