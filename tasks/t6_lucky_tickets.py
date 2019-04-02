@@ -5,24 +5,30 @@ import argparse
 
 
 def main():
-    args = parse_args_from_cmdline_6(sys.argv[1:])
+    args = parse_args_from_cmdline(sys.argv[1:])
 
     print("Generating tickets...")
     tickets_list = [f"{num:06}" for num in range(1000000)]
 
-    if Path(args.file_name).is_file():
-        method = get_file_content(args.file_name)
+    if Path(args.file_path).is_file():
+        method = get_file_content(args.file_path)
         if method:
-            print(count_tickets(method, tickets_list))
+            print("Counting...")
+            res_data = count_tickets(method, tickets_list)
         else:
-            activate_interactive_mode(tickets_list)
+            res_data = activate_interactive_mode(tickets_list)
     else:
-        activate_interactive_mode(tickets_list)
+        res_data = activate_interactive_mode(tickets_list)
+
+    if res_data:
+        print(f"You got {res_data[0]} lucky tickets, using '{res_data[1]}' method!")
+    else:
+        print("There is no lucky tickets...")
 
 
 def get_file_content(file_name):
     file = open(file_name, "r")
-    method = file.readline().strip().lower()
+    method = file.readline()
     file.close()
 
     if method:
@@ -36,7 +42,6 @@ def get_file_content(file_name):
 
 
 def count_tickets(method, tickets_list):
-    print("Counting...")
     counter = 0
     for ticket in tickets_list:
         if method == "moscow":
@@ -51,7 +56,7 @@ def count_tickets(method, tickets_list):
             if odd == even:
                 counter += 1
 
-    return f"You got {counter} lucky tickets, using {method} method!"
+    return counter, method
 
 
 def activate_interactive_mode(tickets_list):
@@ -63,15 +68,16 @@ def activate_interactive_mode(tickets_list):
         if user_method == "":
             exit()
 
-    print(count_tickets(user_method.lower(), tickets_list))
+    print("Counting...")
+    return count_tickets(user_method.lower(), tickets_list)
 
 
-def parse_args_from_cmdline_6(argv):
+def parse_args_from_cmdline(argv):
     parser = argparse.ArgumentParser(
         prog="Lucky_tickets",
         description="Count amount of lucky tickets depends on count method")
-    parser.add_argument("--file", dest="file_name", default="",
-                        help="set file with method name")
+    parser.add_argument("--file", dest="file_path", default="",
+                        help="set file path with method name")
     return parser.parse_args(argv)
 
 
