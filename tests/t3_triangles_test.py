@@ -20,7 +20,7 @@ class TestTriangle(unittest.TestCase):
     def test_validate_triangle_size_perfect_input(self):
         self.assertEqual(None, self.triangle_4.validate_triangle_size())
 
-    # ???
+    # idk
     # def test_validate_triangle_size_incorrect_input(self):
     #     self.assertRaises(ValueError, Triangle("test_error", 7, 1, 9))
 

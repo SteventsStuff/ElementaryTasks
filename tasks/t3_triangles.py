@@ -25,7 +25,7 @@ def main():
         if not user_choose.lower() in ("y", "yes"):
             break
 
-    print("\n============= Triangles list: ===============")
+    print("\n============== Triangles list: ================")
     res_list = print_triangles(triangle_list)
     print(res_list)
 
