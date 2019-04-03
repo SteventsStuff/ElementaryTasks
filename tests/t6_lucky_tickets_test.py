@@ -69,3 +69,7 @@ class LuckyTicketsTestCase(unittest.TestCase):
     def test_get_user_input_method_empty_inout(self):
         with patch("tasks.t6_lucky_tickets.input", return_value=""):
             self.assertRaises(SystemExit, lt.get_user_input_method)
+
+    # testing tickets generator
+    def test_generate_lucky_tickets(self):
+        self.assertEqual(1000000, len(lt.generate_lucky_tickets()))
