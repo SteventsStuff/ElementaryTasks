@@ -14,32 +14,19 @@ def main():
             args.height = int(args.height)
             if check_board_size(args.width, args.height, terminal_size):
                 print(ChessBoard(args.width, args.height).draw_board())
+                exit()
         except ValueError:
-            print(print_interactive_mode_message())
-            activate_interactive_mode(terminal_size)
-    else:
-        print("Interactive mode:")
-        activate_interactive_mode(terminal_size)
+            print("Invalid values!")
+
+    print("Interactive mode:")
+    while True:
+        user_width, user_height = get_user_input()
+        if check_board_size(user_width, user_height, terminal_size):
+            print(ChessBoard(user_width, user_height).draw_board())
+            break
 
 
-def print_interactive_mode_message():
-    return "Invalid values!\nInteractive mode:"
-
-
-def print_wrong_type_message():
-    return "WIDTH/HEIGHT must be integers!\n"
-
-
-def activate_interactive_mode(terminal_size):
-    user_width, user_height = get_user_input()
-    if check_board_size(user_width, user_height, terminal_size):
-        print(ChessBoard(user_width, user_height).draw_board())
-        return True
-    else:
-        activate_interactive_mode(terminal_size)
-
-
-def get_user_input():
+def get_user_input() -> (int, int):
     while True:
         try:
             print("Enter empty lines to exit")
@@ -50,10 +37,10 @@ def get_user_input():
             user_width, user_height = int(user_width), int(user_height)
             return user_width, user_height
         except ValueError:
-            print(print_wrong_type_message())
+            print("WIDTH/HEIGHT must be integers!\n")
 
 
-def check_board_size(width, height, term_size):
+def check_board_size(width, height, term_size) -> bool:
     if not (0 < width < term_size.columns and 0 < height < term_size.lines):
         print("\nInvalid size!")
         print(f"WIDTH must be min: 1 and max: {term_size.columns - 1}")
