@@ -40,24 +40,19 @@ def num2words(num):
 
 
 def main():
-    args = parse_args_from_cmdline_5(sys.argv[1:])
+    args = parse_args_from_cmdline(sys.argv[1:])
 
     if args.num:
         try:
             args.num = int(args.num)
             print(num2words(args.num))
+            exit()
         except ValueError:
             print("Invalid input!\nInteractive mode:")
-            number = get_user_input()
-            print(num2words(number))
-    else:
-        print("Interactive mode:")
-        number = get_user_input()
-        print(num2words(number))
 
-
-def print_invalid_input_message():
-    return "Invalid input!"
+    print("Interactive mode:")
+    number = get_user_input()
+    print(num2words(number))
 
 
 def get_user_input():
@@ -70,10 +65,10 @@ def get_user_input():
             num = int(num)
             return num
         except ValueError:
-            print(print_invalid_input_message())
+            print("Invalid input!")
 
 
-def parse_args_from_cmdline_5(argv):
+def parse_args_from_cmdline(argv):
     parser = argparse.ArgumentParser(
         prog="Num_to_str",
         description="Convert number to a string")
