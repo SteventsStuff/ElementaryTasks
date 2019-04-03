@@ -8,17 +8,18 @@ def main():
     args = parse_args_from_cmdline(sys.argv[1:])
 
     print("Generating tickets...")
-    tickets_list = [f"{num:06}" for num in range(1000000)]
+    tickets_list = generate_lucky_tickets()
 
+    method = ""
     if Path(args.file_path).is_file():
         method = get_file_content(args.file_path)
-        if method:
-            print("Counting...")
-            res_data = count_tickets(method, tickets_list)
-        else:
-            res_data = activate_interactive_mode(tickets_list)
+
+    if method:
+        print("Counting...")
+        res_data = count_tickets(method, tickets_list)
     else:
-        res_data = activate_interactive_mode(tickets_list)
+        method = get_user_input_method()
+        res_data = count_tickets(method, tickets_list)
 
     if res_data:
         print(f"You got {res_data[0]} lucky tickets, using '{res_data[1]}' method!")
@@ -26,9 +27,13 @@ def main():
         print("There is no lucky tickets...")
 
 
-def get_file_content(file_name):
+def generate_lucky_tickets():
+    return [f"{num:06}" for num in range(1000000)]
+
+
+def get_file_content(file_name) -> str:
     file = open(file_name, "r")
-    method = file.readline()
+    method = file.readline().strip().lower()
     file.close()
 
     if method:
@@ -36,12 +41,14 @@ def get_file_content(file_name):
             print(f"'{method}' will be used!")
             return method
         else:
-            print(f"'{method}' is invalid!")
+            print(f"'{method[:-1]}' is invalid!")
+            return ""
     else:
         print("Your file is empty!")
+        return ""
 
 
-def count_tickets(method, tickets_list):
+def count_tickets(method, tickets_list) -> (int, str):
     counter = 0
     for ticket in tickets_list:
         if method == "moscow":
@@ -59,7 +66,7 @@ def count_tickets(method, tickets_list):
     return counter, method
 
 
-def activate_interactive_mode(tickets_list):
+def get_user_input_method() -> str:
     print("Interactive mode:")
     user_method = ""
     print("Enter empty line to exit")
@@ -69,7 +76,7 @@ def activate_interactive_mode(tickets_list):
             exit()
 
     print("Counting...")
-    return count_tickets(user_method.lower(), tickets_list)
+    return user_method
 
 
 def parse_args_from_cmdline(argv):

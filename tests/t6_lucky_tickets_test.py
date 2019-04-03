@@ -10,7 +10,6 @@ class LuckyTicketsTestCase(unittest.TestCase):
         self.ticket_list = ["998327", "984984", "002268", "123123", "202268",
                             "546654", "010000", "159846", "325684", "258179"]
         self.file_path = "../tasks/tickets.txt"
-        self.test_str = "This is some string for test, so you can use it, buddy!"
 
     # arguments parser test
     def test_parse_args_from_cmdline_has_two_args(self):
@@ -56,21 +55,17 @@ class LuckyTicketsTestCase(unittest.TestCase):
 
     @patch("tasks.t6_lucky_tickets.open", mock_open(read_data="some dummy line..."))
     def test_get_file_content_wrong_result(self):
-        self.assertEqual(None, lt.get_file_content(self.file_path))
+        self.assertEqual("", lt.get_file_content(self.file_path))
 
-    # testing interactive mode 55252
-    def test_activate_interactive_mode_moscow_inout(self):
+    # testing interactive mode
+    def test_get_user_input_method_moscow_inout(self):
         with patch("tasks.t6_lucky_tickets.input", return_value="moscow"):
-            self.assertEqual((3, "moscow"),
-                             lt.activate_interactive_mode(self.ticket_list))
+            self.assertEqual("moscow", lt.get_user_input_method())
 
-    def test_activate_interactive_mode_piter_inout(self):
+    def test_get_user_input_method_piter_inout(self):
         with patch("tasks.t6_lucky_tickets.input", return_value="piter"):
-            self.assertEqual((4, "piter"),
-                             lt.activate_interactive_mode(self.ticket_list))
+            self.assertEqual("piter", lt.get_user_input_method())
 
-    def test_activate_interactive_mode_empty_inout(self):
+    def test_get_user_input_method_empty_inout(self):
         with patch("tasks.t6_lucky_tickets.input", return_value=""):
-            self.assertRaises(SystemExit,
-                              lt.activate_interactive_mode,
-                              self.ticket_list)
+            self.assertRaises(SystemExit, lt.get_user_input_method)
