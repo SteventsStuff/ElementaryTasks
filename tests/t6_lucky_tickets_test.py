@@ -73,3 +73,7 @@ class LuckyTicketsTestCase(unittest.TestCase):
     # testing tickets generator
     def test_generate_lucky_tickets(self):
         self.assertEqual(1000000, len(lt.generate_lucky_tickets()))
+
+
+if __name__ == "__main__":
+    unittest.main()
