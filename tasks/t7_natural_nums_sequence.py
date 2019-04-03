@@ -4,25 +4,27 @@ import argparse
 
 
 def main():
-    args = parse_args_from_cmdline_7(sys.argv[1:])
+    args = parse_args_from_cmdline(sys.argv[1:])
 
     if args.number:
         try:
             num = int(args.number)
             if num < 1:
                 raise ValueError
-            print([x for x in range(num) if x**2 < num and x > 0])
+            print(get_sequence(num))
+            exit()
         except (TypeError, ValueError):
-            activate_interactive_mode()
-    else:
-        activate_interactive_mode()
+            print("Invalid input!")
+
+    num = get_user_input()
+    print(get_sequence(num))
 
 
-def print_invalid_input_message():
-    return "Invalid input!"
+def get_sequence(number):
+    return [x for x in range(number) if x ** 2 < number and x > 0]
 
 
-def activate_interactive_mode():
+def get_user_input():
     print("You need to enter positive integer number!")
     while True:
         try:
@@ -33,14 +35,12 @@ def activate_interactive_mode():
             number = int(number)
             if number < 1:
                 raise ValueError
+            return number
         except (TypeError, ValueError):
-            print(print_invalid_input_message())
-        else:
-            print([x for x in range(number) if x ** 2 < number and x > 0])
-            break
+            print("Invalid input!")
 
 
-def parse_args_from_cmdline_7(argv):
+def parse_args_from_cmdline(argv):
     parser = argparse.ArgumentParser(
         prog="Natural_nums_sequence",
         description="""Displays sequence of numbers, power of which less
