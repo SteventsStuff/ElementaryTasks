@@ -5,45 +5,42 @@ import argparse
 
 
 def main():
-    file_name, find_str, replace_str = parse_args_from_cmdline_4(sys.argv[1:])
+    file_name, find_str, replace_str = parse_args_from_cmdline(sys.argv[1:])
 
-    if pathlib.Path(file_name).is_file() and find_str:
-        if replace_str:
-            parse_file(file_name, find_str, replace_str)
-        else:
-            parse_file(file_name, find_str)
-    else:
+    if not (pathlib.Path(file_name).is_file() and find_str):
         print("Interactive mode:")
-        activate_interactive_mode()
+        file_name, find_str, replace_str = get_user_input()
+
+    if replace_str:
+        result_msg = parse_file(file_name, find_str, replace_str)
+    else:
+        result_msg = parse_file(file_name, find_str)
+
+    print(result_msg)
 
 
-def print_no_file_found_message():
-    return "No file with this name!\n"
-
-
-def activate_interactive_mode():
+def get_user_input():
     while True:
         try:
             print("Enter empty lines to exit")
             file_name = input("Enter file name: ")
             find_str = input("Enter string for search: ")
             replace_str = input("Enter string to replace (optional): ")
-            if not (file_name, find_str, replace_str):
+            if file_name == "" and find_str == "" and replace_str == "":
                 exit()
             if not pathlib.Path(file_name).is_file():
                 raise FileNotFoundError
             if replace_str and find_str:
-                parse_file(file_name, find_str, replace_str)
+                return file_name, find_str, replace_str
             elif find_str:
-                parse_file(file_name, find_str)
+                return file_name, find_str, None
             else:
                 print("You need at least to enter string for search!\n")
-            break
         except FileNotFoundError:
-            print(print_no_file_found_message())
+            print("No file with this name!\n")
 
 
-def parse_file(file_name, str_find, str_replace=None):
+def parse_file(file_name, str_find, str_replace=None) -> str:
     """Depends on mode, search how many times <str_find> meets in file,
      or search <str_find> and replace it with <str_replace>
     """
@@ -56,16 +53,17 @@ def parse_file(file_name, str_find, str_replace=None):
         file_w = open(file_name, "w")
         file_w.write(new_text)
         file_w.close()
-        print("File was changed!")
+        result_msg = "File was changed!"
     else:
         text_tmp = "".join(file.read().split("\n"))
         counter = text_tmp.count(str_find)
-        print(f'"{str_find}" meets {counter} times')
+        result_msg = f'"{str_find}" meets {counter} times'
 
     file.close()
+    return result_msg
 
 
-def parse_args_from_cmdline_4(argv):
+def parse_args_from_cmdline(argv):
     parser = argparse.ArgumentParser(
         prog="File_parser",
         description="""Count entries of <string> you need to 
