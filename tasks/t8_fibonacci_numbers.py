@@ -4,8 +4,7 @@ import argparse
 
 
 def main():
-    args = parse_args_from_cmdline_8(sys.argv[1:])
-    print(args)
+    args = parse_args_from_cmdline(sys.argv[1:])
 
     if args[0] and args[1]:
         try:
@@ -14,19 +13,16 @@ def main():
             if not 0 <= int_min < int_max:
                 raise ValueError
             print_fibo(int_min, int_max)
+            exit()
         except (TypeError, ValueError):
-            print(print_invalid_args_message())
-            activate_interactive_mode()
-    else:
-        activate_interactive_mode()
+            print("Invalid arguments!")
 
-
-def print_invalid_args_message():
-    return "Invalid arguments!"
-
-
-def activate_interactive_mode():
     print("Interactive mode:")
+    usr_min, usr_max = get_user_input()
+    print_fibo(usr_min, usr_max)
+
+
+def get_user_input():
     while True:
         try:
             print("Enter empty lines to exit")
@@ -37,10 +33,9 @@ def activate_interactive_mode():
             min_val, max_val = int(min_val), int(max_val)
             if not 0 <= min_val < max_val:
                 raise ValueError
-            print_fibo(min_val, max_val)
-            break
-        except (TypeError, ValueError):
-            print(print_invalid_args_message())
+            return min_val, max_val
+        except ValueError:
+            print("Invalid arguments!")
 
 
 def fibonacci_seq():
@@ -61,7 +56,7 @@ def print_fibo(start, end):
             break
 
 
-def parse_args_from_cmdline_8(argv):
+def parse_args_from_cmdline(argv):
     parser = argparse.ArgumentParser(
         prog="Fibonacci_numbers",
         description="Displays sequence of fibonacci numbers, in range")
