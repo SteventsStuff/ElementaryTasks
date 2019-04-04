@@ -5,7 +5,7 @@ import argparse
 import tasks.t6_lucky_tickets as lt
 
 
-class LuckyTicketsTestCase(unittest.TestCase):
+class TestLuckyTickets(unittest.TestCase):
     def setUp(self) -> None:
         self.ticket_list = ["998327", "984984", "002268", "123123", "202268",
                             "546654", "010000", "159846", "325684", "258179"]
